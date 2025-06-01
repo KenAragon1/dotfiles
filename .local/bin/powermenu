@@ -1,0 +1,20 @@
+#!/usr/bin/sh
+
+option=$(printf "  Shutdown\n  Reboot\n󰍃  Logout\n󰤄  Susped\n  Lock" | rofi -dmenu -i -theme-str 'inputbar {children: [entry];} listview {lines: 5;}')
+
+case "$option" in
+	"  Shutdown") 
+		poweroff;;
+	"  Reboot") 
+		reboot;;
+	"󰍃  Logout")
+		i3-msg exit;;
+	"󰤄  Susped")
+		systemctl suspend;;
+	"  Lock")
+		lockscreen;;
+	*) 
+		exit 1;;
+esac
+
+
