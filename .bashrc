@@ -18,4 +18,5 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-PS1='[\u@\h \W]\$ '
+PS1="[\u@\h \w]$ "
+
