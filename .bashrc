@@ -22,6 +22,12 @@ function y() {
 }
 
 # enable git prompt
-source /usr/share/git/completion/git-prompt.sh
+. ~/git-prompt.sh
+GIT_PS1_SHOWUNTRACKEDFILES="enable"	
+GIT_PS1_SHOWDIRTYSTATE="auto"
+GIT_PS1_SHOWUPSTREAM="enable"
 
-PS1='[\u@\h \w$(__git_ps1 " (%s)")]$ '
+PROMPT_COMMAND='__git_ps1 "[\u@\h \w" "]$ "'
+
+# PS1=$PROMPT_COMMAND
+# PS1="[\u@\h \w]$ "
