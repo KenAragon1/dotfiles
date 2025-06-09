@@ -9,6 +9,9 @@ alias ls='ls -pa --color=auto'
 alias grep='grep --color=auto'
 alias vim='nvim'
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 # yazi
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -18,5 +21,7 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-PS1="[\u@\h \w]$ "
+# enable git prompt
+source /usr/share/git/completion/git-prompt.sh
 
+PS1='[\u@\h \w$(__git_ps1 " (%s)")]$ '
