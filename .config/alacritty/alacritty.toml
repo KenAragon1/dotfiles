@@ -1,0 +1,34 @@
+# alacritty.toml
+
+[window]
+padding = { x = 12, y = 12 }
+
+# Font configuration (set your preferred font name here)
+[font] 
+normal.family = "Iosevkaterm" 
+size = 7.04
+
+# Gruber Darker color scheme
+[colors.primary]
+background = "#181818"
+foreground = "#e4e4ef"
+
+[colors.normal]
+black   = "#2e3436"
+red     = "#a40000"
+green   = "#4e9a06"
+yellow  = "#c4a000"
+blue    = "#3465a4"
+magenta = "#75507b"
+cyan    = "#34a0a4"
+white   = "#babdb9"
+
+[colors.bright]
+black   = "#555753"
+red     = "#ef2929"
+green   = "#8ae234"
+yellow  = "#fce94f"
+blue    = "#729fcf"
+magenta = "#ad7fa8"
+cyan    = "#72d9cf"
+white   = "#eeeeec"

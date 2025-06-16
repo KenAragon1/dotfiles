@@ -11,6 +11,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export BROWSER="brave"
 export PAGER="less"
-export TERMINAL="st"
+export TERMINAL="alacritty"
 
 export PATH=$HOME/.local/bin:$PATH
