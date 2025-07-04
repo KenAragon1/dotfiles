@@ -9,7 +9,7 @@ export PATH=$PATH:$HOME/go/bin
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export BROWSER="brave"
+export BROWSER="firefox"
 export PAGER="less"
 export TERMINAL="alacritty"
 
