@@ -5,8 +5,8 @@ padding = { x = 12, y = 12 }
 
 # Font configuration (set your preferred font name here)
 [font] 
-normal.family = "Iosevkaterm" 
-size = 7.04
+normal.family = "Berkeley Mono Variable" 
+size = 7
 
 # Gruber Darker color scheme
 [colors.primary]
