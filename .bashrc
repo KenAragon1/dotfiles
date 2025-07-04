@@ -5,7 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls -pa --color=auto'
+# alias ls='ls -pa --color=auto'
+alias ls='lsd -a'
 alias grep='grep --color=auto'
 alias vim='nvim'
 
@@ -26,36 +27,21 @@ function y() {
 GIT_PS1_SHOWDIRTYSTATE="true"
 GIT_PS1_STATESEPARATOR=""
 
-red="$(tput setaf 1 )"
-yellow="$(tput setaf 3 )"
-blue="$(tput setaf 4 )"
-magenta="$(tput setaf 5 )"
-
-bright_red="$(tput setaf 9 )"
-bright_green="$(tput setaf 10 )"
-bright_blue="$(tput setaf 12 )"
-
-reset="$(tput sgr0 )"
+grey="\[\e[90m\]"
+green="\[\e[32m\]"
+red="\[\e[31m\]"
+reset="\[\e[0m\]"
 
 PROMPT_COMMAND='__prompt_command'
 
 __prompt_command() {
-    EXIT="$?"
-    raw_branch="$(__git_ps1 '%s')"
+    exit="$?"
 
-    if [ -n "$raw_branch" ]; then
-        git_branch="${blue} git:(${red}${raw_branch}${blue})"
+    if [ "$exit" -ne 0 ]; then
+        VALID="${red}${reset} "
     else
-        git_branch=""
+        VALID="${green}${reset} "
     fi
 
-    if [ "$EXIT" -ne 0 ]; then
-        PS1='${bright_red}  ${bright_blue}\W${git_branch} ${magenta} ${reset}'
-    else
-        PS1='${bright_green}  ${bright_blue}\W${git_branch} ${magenta} ${reset}'
-    fi
+    PS1="${VALID} \W ${grey}$(__git_ps1 'git:(%s) ')${reset}\$ "
 }
-
-
-# PS1=$PROMPT_COMMAND
-# PS1="[\u@\h \w]$ "
