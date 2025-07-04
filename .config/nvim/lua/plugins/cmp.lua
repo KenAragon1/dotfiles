@@ -1,13 +1,13 @@
 return {
     {
         'hrsh7th/nvim-cmp',
-        -- enabled = false,
         event = 'InsertEnter',
         dependencies = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'onsails/lspkind.nvim',
-            'L3MON4D3/LuaSnip'
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip'
         },
         config = function()
             local cmp = require 'cmp'
@@ -16,11 +16,6 @@ return {
             cmp.setup({
                 completion = {
                     completeopt = 'menu,menuone,preview,noselect',
-                    autocomplete = {
-                        cmp.TriggerEvent.TextChanged,
-                        cmp.TriggerEvent.InsertEnter,
-                    },
-                    keyword_length = 0,
                 },
                 snippet = {
                     expand = function(args)
@@ -32,10 +27,21 @@ return {
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ['<C-l>'] = cmp.mapping(function()
+                        if luasnip.expand_or_locally_jumpable() then
+                            luasnip.jump()
+                        end
+                    end, { 'i', 's', }),
+                    ['<C-h>'] = cmp.mapping(function()
+                        if luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        end
+                    end, { 'i', 's', })
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
                     { name = 'path' },
                     { name = "buffer" }
                 }),
@@ -49,9 +55,6 @@ return {
                         ellipsis_char = '...',
                     })
                 },
-                experimental = {
-                    ghost_text = true
-                }
             })
         end
     }
