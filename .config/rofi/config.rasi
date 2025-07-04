@@ -1,8 +1,8 @@
 configuration {
   drun-display-format : "{icon} {name}";
-  font : "Iosevkaterm 12";
+  font : "Berkeley Mono Variable 12";
   modi : "window,run,drun";
   show-icons : true;
 }
 
-@theme "~/.config/rofi/themes/monokai.rasi"
+@theme "~/.config/rofi/themes/gruber-darker.rasi"

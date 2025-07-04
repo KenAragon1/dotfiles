@@ -9,9 +9,9 @@
 general {
     colors = true
         interval = 5
-        #color_good = "#A6E22E"     
-        #color_degraded = "#E6DB74" 
-        #color_bad = "#F92672"      
+        color_good = "#8ae234"     
+        color_degraded = "#4e9a06" 
+        color_bad = "#ef2929"      
 }
 
 order += "memory"

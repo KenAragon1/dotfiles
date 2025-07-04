@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Iosevkaterm, Noto Sans Symbols 10
+font pango:Berkeley Mono Variable 10
 
 # autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -10,6 +10,7 @@ exec --no-startup-id picom
 # exec --no-startup-id feh --bg-scale ~/wallpapers/astronout.jpg
 exec --no-startup-id nitrogen --restore &
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit &
+exec --no-startup-id xfce4-power-manager
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Keybinds
@@ -146,6 +147,27 @@ bar {
     status_command i3status
     position bottom
     separator_symbol "::"
+    colors {
+        background #181818
+        statusline #e4e4ef
+        separator #555753
+
+        focused_workspace  #282828 #2e3436 #e4e4ef
+        active_workspace   #333333 #5f676a #e4e4ef
+        inactive_workspace #181818 #181818 #666666
+        urgent_workspace   #2f343a #900000 #e4e4ef
+        binding_mode       #2f343a #900000 #e4e4ef
+    }
 }
 
 for_window [class="^steam$"] border normal
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #2e3436 #2e3436 #e4e4ef #babdb9   #2e3436
+client.focused_inactive #2e3436 #282828 #e4e4ef #484e50   #2e3436
+client.unfocused        #2e3436 #181818 #e4e4ef #292d2e   #2e3436
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
