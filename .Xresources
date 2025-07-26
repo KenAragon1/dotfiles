@@ -1,28 +1,30 @@
-XTerm*faceName: IosevkaTerm:style=Semibold
-XTerm*faceSize: 12
-XTerm*utf8: 1
-XTerm*locale: true
+Xft.dpi:    96
+Xft.antialias:  1
+Xft.hinting:    1
+Xft.hintstyle:  hintmedium
 
-! --- Background & Foreground ---
-XTerm*background: #181818
-XTerm*foreground: #e4e4ef
-XTerm*cursorColor: #f5f5f5
+*color0:     #2e3436
+*color1:     #a40000
+*color2:     #4e9a06
+*color3:     #c4a000
+*color4:     #3465a4
+*color5:     #75507b
+*color6:     #34a0a4
+*color7:     #babdb9
+*color8:     #555753
+*color9:     #ef2929
+*color10:    #8ae234
+*color11:    #fce94f
+*color12:    #729fcf
+*color13:    #ad7fa8
+*color14:    #72d9cf
+*color15:    #eeeeec
 
-! --- ANSI Colors ---
-XTerm*color0:  #181818  
-XTerm*color1:  #f43841  
-XTerm*color2:  #73c936  
-XTerm*color3:  #ffdd33  
-XTerm*color4:  #96a6c8  
-XTerm*color5:  #9e95c7  
-XTerm*color6:  #95a99f  
-XTerm*color7:  #f4f4ff  
+URxvt.background:  #181818 
+URxvt.foreground:  #e4e4ef
 
-XTerm*color8:  #555555  
-XTerm*color9:  #f43841  
-XTerm*color10: #73c936  
-XTerm*color11: #ffdd33  
-XTerm*color12: #96a6c8  
-XTerm*color13: #9e95c7  
-XTerm*color14: #95a99f  
-XTerm*color15: #ffffff  
+URxvt.font: xft:Berkeley Mono Variable:size=11:style=Regular,\
+            xft:Jetbrains Mono NF:size=11:style=Regular
+URxvt*depth: 32
+
+URxvt.scrollBar: false
