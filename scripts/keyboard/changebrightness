@@ -1,0 +1,25 @@
+#!/bin/sh
+
+notify_brightness() {
+	current=$(brightnessctl g)
+	max=$(brightnessctl m)
+	percentage=$(( current * 100 / max ))
+
+	notify-send -a "changebrightness" -u low -r 9991 -h int:value:"$percentage" "Brightness $percentage%" -t 5000
+}
+
+set_brightness() {
+	brightnessctl set $1
+}
+
+case $1 in
+	up)
+		set_brightness +3%
+		notify_brightness
+		;;
+	down)
+		set_brightness 3%-
+		notify_brightness
+		;;
+esac
+

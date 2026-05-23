@@ -1,0 +1,11 @@
+#!/bin/sh
+
+get_battery() 
+{
+	acpi | grep -Eo '[0-9][0-9]'
+}
+
+BAT=( $(get_battery) )
+BATTERY_PERCENTAGE=$(((BAT[0] + BAT[1]) / 2))
+
+echo "$BATTERY_PERCENTAGE%"

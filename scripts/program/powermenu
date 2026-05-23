@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-option=$(printf "  Shutdown\n  Reboot\n󰍃  Logout\n󰤄  Susped\n  Lock" | rofi -dmenu -i -theme-str 'inputbar {children: [entry];} listview {lines: 5;}')
+option=$(printf "  Shutdown\n  Reboot\n󰍃  Logout\n󰤄  Suspend\n  Lock" | wofi -dmenu -i -theme-str 'inputbar {children: [entry];} listview {lines: 5;}')
 
 case "$option" in
 	"  Shutdown") 
@@ -9,7 +9,7 @@ case "$option" in
 		reboot;;
 	"󰍃  Logout")
 		i3-msg exit;;
-	"󰤄  Susped")
+	"󰤄  Suspend")
 		systemctl suspend;;
 	"  Lock")
 		lockscreen;;

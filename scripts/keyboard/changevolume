@@ -1,0 +1,22 @@
+#!/bin/sh
+
+send_notification() {
+	percentage=$(pamixer --get-volume)
+
+	icon="$HOME/.local/share/icons/dunst/volume.svg"
+	notify-send -a "changevolume" -u low -r 9991 -h int:value:"$percentage" -i $icon "Volume $percentage%" -t 5000
+}
+
+case $1 in
+	up)
+		pactl set-sink-volume \@DEFAULT_SINK@ +2%
+        pkill -RTMIN+10 dwmblock
+		send_notification
+		;;
+	down)
+		pactl set-sink-volume \@DEFAULT_SINK@ -2%
+        pkill -RTMIN+10 dwmblock
+		send_notification
+		;;
+esac
+
