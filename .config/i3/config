@@ -1,37 +1,34 @@
 set $mod Mod4
 
-font pango:Berkeley Mono Variable 10
+set $terminal st
+
+font pango:Iosevka Term Extended 9
 
 # autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock -- lockscreen &
-exec --no-startup-id nm-applet
-exec --no-startup-id picom
-# exec --no-startup-id feh --bg-scale ~/wallpapers/astronout.jpg
-exec --no-startup-id nitrogen --restore &
+# exec --no-startup-id mpv ~/Downloads/Windows_Vista_7_8_10.mp3
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit &
-exec --no-startup-id xfce4-power-manager
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id picom &
+exec --no-startup-id feh --bg-scale ~/wallpapers/windows_xp.jpg
 
 # Keybinds
-bindsym $mod+space exec --no-startup-id rofi -show drun
-bindsym $mod+b exec --no-startup-id $BROWSER
-bindsym $mod+Delete exec --no-startup-id powermenu
-bindsym $mod+Return exec --no-startup-id $TERMINAL
-bindsym Print exec --no-startup-id flameshot gui
-bindsym Shift+Print exec --no-startup-id flameshot full -p ~/Pictures/Screenshots
+# bindsym $mod+space exec --no-startup-id rofi -show drun
+bindsym $mod+Delete exec --no-startup-id ~/.config/scripts/powermenu
+bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Print exec --no-startup-id flameshot gui
+bindsym $mod+Shift+Print exec --no-startup-id flameshot full -p ~/Pictures/Screenshots
 
 # close window
 bindsym $mod+Shift+q kill
 
 # brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id changebrightness up &
-bindsym XF86MonBrightnessDown exec --no-startup-id changebrightness down &
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/scripts/keyboard/changebrightness up &
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/scripts/keyboard/changebrightness down &
 
 # Volume
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id changevolume up
-bindsym XF86AudioLowerVolume exec --no-startup-id changevolume down
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/keyboard/changevolume up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/keyboard/changevolume down
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -42,7 +39,7 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run -fn "Iosevka Term Extended"
 
 # change focus
 bindsym $mod+h focus left
@@ -65,8 +62,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Split Window
-bindsym $mod+shift+semicolon split h
-bindsym $mod+semicolon split v
+bindsym $mod+b split h
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -123,51 +120,37 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+for_window [all] border normal 2
+for_window [class="Pcmanfm"] floating enable, resize set 720 480
+
+# default_border pixel 2
+# for_window [all] border pixel 2
 
 # Status bar
 bar {
     status_command i3status
     position bottom
     separator_symbol "::"
-    colors {
-        background #181818
-        statusline #e4e4ef
-        separator #555753
-
-        focused_workspace  #282828 #2e3436 #e4e4ef
-        active_workspace   #333333 #5f676a #e4e4ef
-        inactive_workspace #181818 #181818 #666666
-        urgent_workspace   #2f343a #900000 #e4e4ef
-        binding_mode       #2f343a #900000 #e4e4ef
-    }
 }
 
-for_window [class="^steam$"] border normal
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #2e3436 #2e3436 #e4e4ef #babdb9   #2e3436
-client.focused_inactive #2e3436 #282828 #e4e4ef #484e50   #2e3436
-client.unfocused        #2e3436 #181818 #e4e4ef #292d2e   #2e3436
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
-
+assign [class = "discord"] 4
+assign [class = "Helium"] 3
