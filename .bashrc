@@ -5,43 +5,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# alias ls='ls -pa --color=auto'
-alias ls='lsd -a'
+alias ls='ls -p --color=auto'
 alias grep='grep --color=auto'
-alias vim='nvim'
 
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
-# yazi
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
+export SUDO_ASKPASS="$HOME/scripts/program/askpass"
+export FZF_DEFAULT_OPTS="--layout=reverse"
 
-# enable git prompt
-. ~/git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE="true"
-GIT_PS1_STATESEPARATOR=""
+# nvm
+export NVM_DIR="$HOME/opts/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 
-grey="\[\e[90m\]"
-green="\[\e[32m\]"
-red="\[\e[31m\]"
-reset="\[\e[0m\]"
-
-PROMPT_COMMAND='__prompt_command'
-
-__prompt_command() {
-    exit="$?"
-
-    if [ "$exit" -ne 0 ]; then
-        VALID="${red}${reset} "
-    else
-        VALID="${green}${reset} "
-    fi
-
-    PS1="${VALID} \W ${grey}$(__git_ps1 'git:(%s) ')${reset}\$ "
-}
+eval "$(fzf --bash)"
